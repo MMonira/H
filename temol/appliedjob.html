@@ -1,0 +1,53 @@
+{% extends "dashboard.html" %}
+
+{% block style %}
+<style>
+   table {
+     border-collapse: collapse;
+     width: 100%;
+   }
+   
+   th, td {
+     text-align: left;
+     padding: 8px;
+   }
+   
+   tr:nth-child(even){background-color: #f2f2f2}
+   
+   th {
+     background-color: #04AA6D;
+     color: white;
+   }
+   </style>
+
+{% endblock style %}
+
+{% block content %}
+
+
+<h2>You Applied For This Job</h2>
+
+<table>
+  <tr>
+    <th>Job Title</th>
+    <th>industry</th>
+    <th>application_deadline</th>
+    <th>experience</th>
+    <th>posted_date</th>
+
+  </tr>
+
+  {% for i in jobs %}
+  <tr>
+      <td>{{i.job_title}}</td>
+      <td>{{i.industry}}</td>
+      <td>{{i.application_deadline}}</td>
+      <td>{{i.experience}}</td>
+      <td>{{i.posted_date}}</td>
+      <td>
+     
+      </td>
+  </tr>
+
+  {% endfor %}
+{% endblock content %}

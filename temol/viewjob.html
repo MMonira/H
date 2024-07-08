@@ -1,0 +1,63 @@
+{% extends "dashboard.html" %}
+
+{% block style %}
+<style>
+   table {
+     border-collapse: collapse;
+     width: 100%;
+   }
+   
+   th, td {
+     text-align: left;
+     padding: 8px;
+   }
+   
+   tr:nth-child(even){background-color: #f2f2f2}
+   
+   th {
+     background-color: #04AA6D;
+     color: white;
+   }
+   </style>
+
+{% endblock style %}
+
+{% block content %}
+
+
+<h2>Most Recent Job List</h2>
+
+<table>
+  <tr>
+    <th>Job Title</th>
+    <th>industry</th>
+    <th>application_deadline</th>
+    <th>experience</th>
+    <th>posted_date</th>
+    <th>Actions</th>
+  </tr>
+
+  {% for i,alread_applied in job_filtered %}
+  <tr>
+      <td>{{i.job_title}}</td>
+      <td>{{i.industry}}</td>
+      <td>{{i.application_deadline}}</td>
+      <td>{{i.experience}}</td>
+      <td>{{i.posted_date}}</td>
+      <td>
+        {% if user.user_type == 'employer' and user == i.created_by %}
+        <a href="{% url 'viewjob' %}">Edit Job</a><br>
+        <a href="{% url 'viewjob' %}">Delete Job</a><br>
+       
+        {% elif alread_applied %}
+        <p>You already Applied for this job</p>
+       
+        {% else %}
+        <a href="{% url 'viewjob' %}">View Job</a><br>
+        <a href="{% url 'applyjob' i.id %}">Apply Job</a>
+        {% endif %}
+      </td>
+  </tr>
+
+  {% endfor %}
+{% endblock content %}

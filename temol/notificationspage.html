@@ -1,0 +1,41 @@
+{% extends "dashboard.html" %}
+{% block style %}
+
+<style>
+   .container {
+       max-width: 800px;
+       margin: auto;
+   }
+   
+   .notification {
+       border: 1px solid #ccc;
+       margin-bottom: 10px;
+       padding: 10px;
+   }
+   
+   .notification p {
+       margin: 0;
+   }
+   
+   .notification.unread {
+       background-color: #e6f7ff;
+   }
+   
+</style>
+{% endblock style %}
+
+{% block content %}
+
+<div class="container">
+   <h1>Notifications</h1>
+   <div class="notification-list">
+       {% for notification in notifications %}
+           <div class="notification {% if notification.unread %}unread{% else %}read{% endif %}">
+               <p>{{ notification.actor }} {{ notification.verb }} {{ notification.action_object }}</p>
+               <small>{{ notification.timestamp }}</small>
+           </div>
+       {% endfor %}
+   </div>
+</div>
+
+{% endblock content %}
